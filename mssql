@@ -1,6 +1,6 @@
 /*
 
-Topic: Subqueries, Joins (inner, left and outer), Aggregated functions (sum, max, count and avg), Common Table Expression (cte).
+Topic: Subqueries, Joins (inner, left and outer), Aggregate functions (sum, max, count and avg), Common Table Expression (cte).
 
 Database Tables used:
 select * from dbo.ChicagoPublicSchools$;
