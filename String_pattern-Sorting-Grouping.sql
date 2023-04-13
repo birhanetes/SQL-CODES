@@ -1,9 +1,10 @@
 /*
+
 Topics: String pattern (like, between, and), Sorting (order by (ASC, DESC)), and Grouping
 
 */
 
--- string pattern
+-- STRING PATTERN
 
 -- Q1. Retrieve all employees whose address is in Elgin,IL.
 
@@ -28,12 +29,12 @@ WHERE DEP_ID=5 AND (SALARY BETWEEN 60000 and 70000);
 SELECT F_NAME, L_NAME, DEP_ID FROM employees
 ORDER BY DEP_ID asc;
 
--- Q5. Retrieve a list of employees ordered in descending order by department ID and within each department ordered alphabetically in descending order by last name.
+-- Q5. Retrieve a list of employees ordered in descending order by department ID and within each department ordered alphabetically in descending order by last name
 
 SELECT F_NAME, L_NAME, DEP_ID FROM employees
 ORDER BY DEP_ID DESC, L_NAME DESC;
 
--- Q6. use department name instead of department ID. Retrieve a list of employees ordered by department name, and within each department ordered alphabetically in descending order by last name.
+-- Q6. use department name instead of department ID and  order alphabetically in descending order by last name
 
 SELECT D.DEP_NAME , E.F_NAME, E.L_NAME
 FROM EMPLOYEES as E, DEPARTMENTS as D
