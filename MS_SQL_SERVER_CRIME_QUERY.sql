@@ -1,6 +1,12 @@
+/*  
+The tables used for the sql project are as follows:
+
 select * from dbo.ChicagoPublicSchools$;
 select * from dbo.ChicagoCensusData$;
 select * from dbo.ChicagoCrimeData$;
+
+*/
+
 
 -- Q1: Find the total number of crimes recorded in the CRIME table
 select count(*) from dbo.ChicagoCrimeData$;
@@ -10,11 +16,11 @@ select COMMUNITY_AREA_NAME,PER_CAPITA_INCOME FROM dbo.ChicagoCensusData$
 Where PER_CAPITA_INCOME < 11000;
 
 --Q3: List all case numbers for crimes involving minors?
-select Case_number, PRIMARY_TYPE from dbo. ChicagoCrimeData$
-where PRIMARY_TYPE = 'Offense Involving Children';
+select Case_number, DESCRIPTION from dbo.ChicagoCrimeData$
+where DESCRIPTION LIKE '%minor%';
 
 -- Q4: List all kidnapping crimes involving a child?
-select PRIMARY_TYPE,DESCRIPTION from dbo. ChicagoCrimeData$
+select CASE_NUMBER, PRIMARY_TYPE,DESCRIPTION from dbo. ChicagoCrimeData$
 where PRIMARY_TYPE = 'KIDNAPPING' and DESCRIPTION like 'child%';
 
 -- Q5: What kinds of crimes were recorded at schools?
@@ -34,11 +40,13 @@ FROM dbo.ChicagoCensusData$
 ORDER BY PERCENT_HOUSEHOLDS_BELOW_POVERTY DESC; 
 
 -- Q8:  Which community area(number) is most crime prone?
-SELECT COMMUNITY_AREA_NUMBER, COMMUNITY_AREA_NAME, SAFETY_SCORE
-FROM dbo.ChicagoPublicSchools$
---WHERE SAFETY_SCORE IS NOT NULL
-WHERE Safety_Icon = 'Very Weak'
-ORDER BY SAFETY_SCORE;
+SELECT CEN. COMMUNITY_AREA_NUMBER, CEN.COMMUNITY_AREA_NAME, COUNT (DISTINCT CRI. CASE_NUMBER) AS CRIME_TOTAL
+FROM dbo. ChicagoCrimeData$ CRI 
+JOIN
+dbo.ChicagoCensusData$ CEN
+ON CEN.COMMUNITY_AREA_NUMBER = CRI.COMMUNITY_AREA_NUMBER
+GROUP BY CEN.COMMUNITY_AREA_NUMBER,CEN.COMMUNITY_AREA_NAME
+ORDER BY COUNT (DISTINCT CRI. CASE_NUMBER) DESC;
 
 --Q9: Use a sub-query to find the name of the community area with highest hardship index.
 select COMMUNITY_AREA_NAME from dbo.ChicagoCensusData$ 
