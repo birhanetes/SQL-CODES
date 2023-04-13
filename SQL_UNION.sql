@@ -1,3 +1,9 @@
+/* 
+
+Topics: Common Table Expression (CTE), Union and join
+
+*/
+
 with hotels as (
 select * from dbo.['2018$']
 union
