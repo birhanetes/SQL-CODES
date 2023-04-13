@@ -1,20 +1,13 @@
+/* 
+
+Topics: 
+Scalar & String Functions such as round, length, ucase, lcase....
+Date & Time Functions such as  day, month, date_add, datediff, current_timestamp, interval ....
+
+*/
+
+-- Table name 
 select * from petrescue;
-
--- Query A1: Enter a function that calculates the total cost of all animal rescues in the PETRESCUE table.
-select sum(cost) as Sum_of_Cost from petrescue;
-
--- Query A2: Enter a function that displays the total cost of all animal rescues in the PETRESCUE table in a column called SUM_OF_COST.
-select sum(cost) as Total_cost from petrescue;
-
--- Query A3: Enter a function that displays the maximum quantity of animals rescued.
-select max(QUANTITY) as highest_quantity from petrescue;
-
--- Query A4: Enter a function that displays the average cost of animals rescued.
-select avg(cost) as Avg_cost from petrescue;
-
--- Query A5: Enter a function that displays the average cost of rescuing a dog.
-select avg(cost/QUANTITY) as Avg_dog_cost from petrescue
-where ANIMAL='dog';
 
 -- Scalar and String Functions
 
