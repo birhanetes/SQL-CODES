@@ -1,0 +1,86 @@
+-- Q1. Using a subquery, find the names of all the tracks for the album "Californication"
+
+SELECT *
+FROM tracks
+WHERE albumid IN (select albumid
+FROM albums
+WHERE title = "Californication");
+
+------------------------------------------------------------------------------
+-- Q2. Find the total number of invoices for each customer along with the customer's full name, city and email
+
+SELECT
+    c.customerid, 
+    firstname, 
+    lastname, 
+    city, 
+    email,
+    COUNT(i.customerid) AS Invoices
+FROM customers c
+JOIN invoices i
+ON c.customerid = i.customerid
+GROUP BY c.customerid;
+
+------------------------------------------------------------------------------
+-- Q3. Retrieve the track name, album, artistID, and trackID for all the albums
+
+SELECT 
+    name, 
+    title AS Album,
+    artistID, 
+    trackID 
+FROM tracks t
+INNER JOIN albums a
+ON t.albumid = a.albumid;
+
+------------------------------------------------------------------------------
+-- Q4. Retrieve a list with the managers last name, and the last name of the employees who report to him or her
+
+SELECT 
+    m.lastname as Manager,
+    e.lastname as Employee
+FROM employees e
+INNER JOIN employees m
+ON e.reportsto = m.employeeid;
+
+------------------------------------------------------------------------------
+--Q5. Find the name and ID of the artists who do not have albums
+
+SELECT
+    name, 
+    r.artistid, 
+    title AS Album
+FROM artists r
+LEFT JOIN albums l
+ON r.artistid = l.artistid
+WHERE title is null;
+
+------------------------------------------------------------------------------
+-- Q6.Use a UNION to create a list of all the employee's and customer's first names and last names ordered by the last name in descending order
+
+SELECT 
+    firstname, 
+    lastname
+from customers
+
+UNION
+
+SELECT 
+    firstname, 
+    lastname
+from employees
+order by lastname desc;
+
+------------------------------------------------------------------------------
+-- Q7. See if there are any customers who have a different city listed in their billing city versus their customer city
+
+SELECT
+    c.customerid,
+    c.firstname,
+    c.lastname,
+    city, 
+    billingcity
+FROM customers c
+INNER JOIN invoices i
+ON c.customerid = i.customerid
+WHERE city <> billingcity;
